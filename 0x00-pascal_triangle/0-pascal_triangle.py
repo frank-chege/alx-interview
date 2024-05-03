@@ -1,8 +1,10 @@
-#creates the pascal triangle
+'''creates the pascal triangle
+'''
 
 #!/usr/bin/python3 
 def pascal_triangle(n):
-    '''creates the pascal triangle'''
+    '''creates the pascal triangle
+    '''
     #list of lists
     triangle = [[1]]
     counter = 0
