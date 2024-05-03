@@ -1,3 +1,4 @@
+#!/usr/bin/python3 
 def pascal_triangle(n):
     #list of lists
     triangle = [[1]]
