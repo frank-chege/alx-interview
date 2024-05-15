@@ -28,3 +28,9 @@ def pascal_triangle(n):
                 triangle.append(list)#add list to the triangle
                 continue
         return triangle
+    
+def main():
+    print(pascal_triangle(12))
+
+if __name__ == '__main__':
+    main()
