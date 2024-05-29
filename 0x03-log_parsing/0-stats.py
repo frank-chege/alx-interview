@@ -1,6 +1,3 @@
-'''
-read from stdin and compute some metrics
-'''
 #!/usr/bin/python3
 import sys
 import ipaddress
