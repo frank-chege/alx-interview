@@ -1,5 +1,7 @@
+'''
+read from stdin and compute some metrics
+'''
 #!/usr/bin/python3
-#read from stdin and compute some metrics
 import sys
 import ipaddress
 from dateutil.parser import parse
