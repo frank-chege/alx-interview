@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 '''read from stdin and compute some metrics'''
 import sys
 import ipaddress
