@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 '''read from stdin and compute some metrics'''
 
-
 import sys
 import signal
 import re
 
-
+#global dict containing the codes
 status_codes = {
     'File size': 0,
     200: 0,
@@ -18,14 +17,13 @@ status_codes = {
     405: 0,
     500: 0
 }
-
+#compiled pattern
 pattern = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - \[(.*)\] "GET /projects/260 HTTP/1\.1" (\d{3,4}) (\d+)$'
 compiled_pat = re.compile(pattern)
 
 def handler(signum, frame):
     '''handles the keyboard interrupt signal'''
     printer() #call printer function
-
 
 def printer():
     '''print the dictionary'''
@@ -34,7 +32,6 @@ def printer():
             continue
         else:
             print(f'{key}: {value}')
-
 
 def format_checker(line)->bool:
     '''receives line read from stdin and check whether it matches the specified format'''
@@ -50,7 +47,6 @@ def format_checker(line)->bool:
         return True
     else:
         return False
-
 
 def main():
     '''read from stdin'''
@@ -71,8 +67,6 @@ def main():
         #print any remaining lines
         if count < 10:
             printer()
-
-
 
 if __name__ == '__main__':
     main()
