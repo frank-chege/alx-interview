@@ -62,7 +62,7 @@ def validUTF8(data: List[int])->bool:
             else:
                 return False
         #4-byte char
-        elif bit1 == 1 and bit2 == 1 and bit3 == 1 and bit4 == 0:
+        elif bit1 == 1 and bit2 == 1 and bit3 == 1 and bit4 == 1:
             #check 2nd byte
             try:
                 byte = data[idx+1]
