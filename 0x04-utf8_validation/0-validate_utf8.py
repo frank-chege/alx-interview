@@ -41,53 +41,53 @@ def validUTF8(data: List[int])->bool:
         #1-byte char
         if bit1 == 0:
             return True
-        #2-byte char
-        elif bit1 == 1 and bit2 == 1 and bit3 == 0:
-            #check the 2nd byte
-            byte = byte_list[idx+1]
-            byte2_bit1 = byte & mask1
-            byte2_bit2 = byte & mask2
-            if byte2_bit1 == 1 and byte2_bit2 == 0:
-                return True
-            else:
-                return False
-        #3-byte char
-        elif bit1 == 1 and bit2 == 1 and bit3 == 1 and bit4 == 0:
-            #check 2nd byte
-            byte2_bit1 = byte & mask1
-            byte2_bit2 = byte & mask2
-            if byte2_bit1 == 1 and byte2_bit2 == 0:
-                #check 3rd byte
-                byte = byte_list[idx+2]
-                byte3_bit1 = byte & mask1
-                byte3_bit2 = byte & mask2
-                if byte3_bit1 == 1 and byte3_bit2 == 0:
-                    return True
-                else:
-                    return False
-            else:
-                return False
-        #4-byte char
-        elif bit1 == 1 and bit2 == 1 and bit3 == 1 and bit4 == 0:
-            #check 2nd byte
-            byte2_bit1 = byte & mask1
-            byte2_bit2 = byte & mask2
-            if byte2_bit1 == 1 and byte2_bit2 == 0:
-                #check 3rd byte
-                byte = byte_list[idx+2]
-                byte3_bit1 = byte & mask1
-                byte3_bit2 = byte & mask2
-                if byte3_bit1 == 1 and byte3_bit2 == 0:
-                    #check 4th byte
-                    byte = byte_list[idx+3]
-                    byte4_bit1 = byte & mask1
-                    byte4_bit2 = byte & mask2
-                    if byte4_bit1 == 1 and byte4_bit2 == 0:
-                        return True
-                    else:
-                        return False
-                else:
-                    return False
-            else:
-                return False
+        # #2-byte char
+        # elif bit1 == 1 and bit2 == 1 and bit3 == 0:
+        #     #check the 2nd byte
+        #     byte = byte_list[idx+1]
+        #     byte2_bit1 = byte & mask1
+        #     byte2_bit2 = byte & mask2
+        #     if byte2_bit1 == 1 and byte2_bit2 == 0:
+        #         return True
+        #     else:
+        #         return False
+        # #3-byte char
+        # elif bit1 == 1 and bit2 == 1 and bit3 == 1 and bit4 == 0:
+        #     #check 2nd byte
+        #     byte2_bit1 = byte & mask1
+        #     byte2_bit2 = byte & mask2
+        #     if byte2_bit1 == 1 and byte2_bit2 == 0:
+        #         #check 3rd byte
+        #         byte = byte_list[idx+2]
+        #         byte3_bit1 = byte & mask1
+        #         byte3_bit2 = byte & mask2
+        #         if byte3_bit1 == 1 and byte3_bit2 == 0:
+        #             return True
+        #         else:
+        #             return False
+        #     else:
+        #         return False
+        # #4-byte char
+        # elif bit1 == 1 and bit2 == 1 and bit3 == 1 and bit4 == 0:
+        #     #check 2nd byte
+        #     byte2_bit1 = byte & mask1
+        #     byte2_bit2 = byte & mask2
+        #     if byte2_bit1 == 1 and byte2_bit2 == 0:
+        #         #check 3rd byte
+        #         byte = byte_list[idx+2]
+        #         byte3_bit1 = byte & mask1
+        #         byte3_bit2 = byte & mask2
+        #         if byte3_bit1 == 1 and byte3_bit2 == 0:
+        #             #check 4th byte
+        #             byte = byte_list[idx+3]
+        #             byte4_bit1 = byte & mask1
+        #             byte4_bit2 = byte & mask2
+        #             if byte4_bit1 == 1 and byte4_bit2 == 0:
+        #                 return True
+        #             else:
+        #                 return False
+        #         else:
+        #             return False
+        #     else:
+        #         return False
 
