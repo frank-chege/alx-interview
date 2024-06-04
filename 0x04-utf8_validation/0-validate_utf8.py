@@ -29,9 +29,13 @@ def validUTF8(data: List[int])->bool:
     mask4 = 1 << 4
     #get each byte
     for byte in byte_list:
-        #negate the bytes
-        bit = byte & mask1
-        if bit == 1:
+        bit1 = byte & mask1
+        bit2 = byte & mask2
+        bit3 = byte & mask3
+        bit4 = byte & mask4
+        if bit1 == 0:
+            return True
+        elif (bit1 == 1 and bit2 == 1) and bit3 == 1 or bit4 == 1:
             return True
         else:
             return False
