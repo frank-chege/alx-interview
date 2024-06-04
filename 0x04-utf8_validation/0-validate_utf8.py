@@ -22,13 +22,16 @@ from typing import List
 def validUTF8(data: List[int])->bool:
     '''checks if a dataset is valid UTF-8'''
     #convert list into bytes
-    byte_list = bytes(data)
+    try:
+        byte_list = bytes(data)
+    except:
+        return False
     mask1 = 1 << 7
     mask2 = 1 << 6
     mask3 = 1 << 5
     mask4 = 1 << 4
     #get each byte
-    for idx in byte_list:
+    for idx in range(0, len(byte_list)):
         byte = byte_list[idx]
         #get the value of the bits using a bit mask
         bit1 = byte & mask1
