@@ -22,7 +22,7 @@ from typing import List
 def validUTF8(data: List[int])->bool:
     '''checks if a dataset is valid UTF-8'''
     #convert list into bytes
-    byte_list = bytes(data)
+    byte_list = data.encode('UTF-8')
     mask1 = 1 << 7
     mask2 = 1 << 6
     mask3 = 1 << 5
