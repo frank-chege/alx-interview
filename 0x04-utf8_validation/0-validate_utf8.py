@@ -87,6 +87,4 @@ def validUTF8(data: List[int])->bool:
                     return False
             else:
                 return False
-        else:
-            return False
 
