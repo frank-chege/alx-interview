@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+'''making change'''
 
 def makeChange(coins: list[int], total: int)->int:
     '''get the minimum no. of coins required to achieve the total'''
