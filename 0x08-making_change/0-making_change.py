@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 '''making change'''
+from typing import List
 
-def makeChange(coins: list[int], total: int)->int:
+def makeChange(coins: List[int], total: int)->int:
     '''get the minimum no. of coins required to achieve the total'''
     if total <= 0:
         return 0
@@ -19,4 +20,3 @@ def makeChange(coins: list[int], total: int)->int:
         count -= 1
         sum -= coins[idx]
     return -1
-        
