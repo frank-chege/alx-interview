@@ -16,19 +16,20 @@ def island_perimeter(grid):
                 first = True
             #check if next col is 1
             if first:
-                count = 1
+                count = 0
                 try:
                     next_w = grid[row][col+1]
                     if next_w == 1:
                         #this row has the width
                         while True:
                             try:
+                                #get width
                                 next = grid[row][col+count]
                                 if next == 1:
                                     width += 1
                                 else:
                                     #get height
-                                    count = 1
+                                    count = 0
                                     while True:
                                         try:
                                             next = grid[row+count][col]
@@ -42,7 +43,7 @@ def island_perimeter(grid):
                                     
                             except KeyError:
                                 #get height
-                                count = 1
+                                count = 0
                                 while True:
                                     try:
                                         next = grid[row+count][col]
@@ -75,7 +76,7 @@ def island_perimeter(grid):
                                         count += 1
                                     
                             except KeyError:
-                                count = 1
+                                count = 0
                                 while True:
                                     try:
                                         next = grid[row][col+count]
@@ -108,7 +109,7 @@ def island_perimeter(grid):
                                         return (height*2) + (width*2)
                                     count += 1
                         except KeyError:
-                            count = 1
+                            count = 0
                             while True:
                                 try:
                                     next = grid[row+count][col-count]
