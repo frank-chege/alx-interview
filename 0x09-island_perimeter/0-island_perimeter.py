@@ -8,8 +8,6 @@ def island_perimeter(grid):
     height = 0
     next = 0
     prev = 0
-    top = 0
-    bott = 0
     for row in range(0, length):
         for col in range(0, len(grid[row])):
             if grid[row][col] == 1:
@@ -22,6 +20,8 @@ def island_perimeter(grid):
                     next = grid[row][col+1]
                 except IndexError:
                     pass
+                if prev == 1 or next == 1:
+                    width += 1
                 #check for height
                 try:
                     top = grid[row-1][col]
@@ -31,12 +31,7 @@ def island_perimeter(grid):
                     bott = grid[row+1][col]
                 except IndexError:
                     pass
-                if top ==1 and bott == 1 and prev ==1 and next ==1:
-                    continue
                 if top == 1 or bott == 1:
                     height += 1
-                if prev == 1 or next == 1:
-                    width += 1
-    print(f'height: {height}, width: {width}')
     return (height*2) + (width*2)
 
