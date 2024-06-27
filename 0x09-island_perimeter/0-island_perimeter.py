@@ -38,5 +38,5 @@ def island_perimeter(grid):
                 if prev == 1 or next == 1:
                     width += 1
     print(f'height: {height}, width: {width}')
-    return (height-2) + (width-2)
+    return (height*2) + (width*2)
 
