@@ -1,37 +1,26 @@
 #!/usr/bin/python3
-'''calculate perimeter'''
+'''Calculate perimeter of the island in the grid'''
 
 def island_perimeter(grid):
-    '''calculate perimeter'''
-    length = len(grid)
-    width = 0
-    height = 0
-    next = 0
-    prev = 0
-    for row in range(0, length):
-        for col in range(0, len(grid[row])):
+    '''Calculate perimeter of the island in the grid'''
+    perimeter = 0
+    rows = len(grid)
+    cols = len(grid[0])
+    
+    for row in range(rows):
+        for col in range(cols):
             if grid[row][col] == 1:
-                #check if next and prev col == 1
-                try:
-                    prev = grid[row][col-1]
-                except IndexError:
-                    pass
-                try:
-                    next = grid[row][col+1]
-                except IndexError:
-                    pass
-                if prev == 1 or next == 1:
-                    width += 1
-                #check for height
-                try:
-                    top = grid[row-1][col]
-                except IndexError:
-                    pass
-                try:
-                    bott = grid[row+1][col]
-                except IndexError:
-                    pass
-                if top == 1 or bott == 1:
-                    height += 1
-    return (height*2) + (width*2)
+                # Check top neighbor
+                if row == 0 or grid[row-1][col] == 0:
+                    perimeter += 1
+                # Check bottom neighbor
+                if row == rows-1 or grid[row+1][col] == 0:
+                    perimeter += 1
+                # Check left neighbor
+                if col == 0 or grid[row][col-1] == 0:
+                    perimeter += 1
+                # Check right neighbor
+                if col == cols-1 or grid[row][col+1] == 0:
+                    perimeter += 1
 
+    return perimeter
