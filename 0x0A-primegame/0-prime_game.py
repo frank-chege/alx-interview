@@ -20,13 +20,6 @@ def is_prime(number):
 
 def isWinner(x, nums):
     '''primegame winner'''
-    #get all prime no.s from the list and store them in a diff list
-    #take turns until all rounds are done to remove no.s starting with maria
-    #to remove prime no, check if the no is in the prime list
-    #if not in list, move to next player
-    #if in list
-    #remove the multiples of the no too
-    #increment each player's score respectively
     prime = []
     maria = True
     maria_score = 0
@@ -53,7 +46,7 @@ def isWinner(x, nums):
                     else:
                         ben_score += 1
                         maria = True
-
+    ben_score += 1
     if maria_score > ben_score:
         winner = 'Maria'
     elif ben_score > maria_score:
