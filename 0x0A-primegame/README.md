@@ -1,1 +1,1 @@
-prime game
+0x0A-primegame

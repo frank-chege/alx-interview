@@ -1,95 +1,61 @@
 #!/usr/bin/python3
-'''checks if a dataset is valid utf-8 encoded'''
-from typing import List
+"""UTF-8 validation module.
+"""
 
-def validUTF8(data: List[int])->bool:
-    '''checks if a dataset is valid UTF-8'''
-    mask1 = 1
-    mask2 = 1 << 1
-    mask3 = 1 << 2
-    mask4 = 1 << 3
-    #get each byte
-    idx = 0
-    while idx < len(data):
-        byte = data[idx]
-        #get the value of the bits using a bit mask
-        bit1 = byte & mask1
-        bit2 = byte & mask2
-        bit3 = byte & mask3
-        bit4 = byte & mask4
-        #1-byte char
-        if bit1 == 0:
-            idx += 1
+
+def validUTF8(data):
+    """Checks if a list of integers are valid UTF-8 codepoints.
+    See <https://datatracker.ietf.org/doc/html/rfc3629#page-4>
+    """
+    skip = 0
+    n = len(data)
+    for i in range(n):
+        if skip > 0:
+            skip -= 1
             continue
-        if bit2 == 0:
+        if type(data[i]) != int or data[i] < 0 or data[i] > 0x10ffff:
             return False
-        #2-byte char
-        elif bit3 == 0:
-            #check the 2nd byte
-            try:
-                byte = data[idx+1]
-            except:
-                return False
-            byte2_bit1 = byte & mask1
-            byte2_bit2 = byte & mask2
-            if byte2_bit1 == 1 and byte2_bit2 == 0:
-                idx += 2
-                continue
+        elif data[i] <= 0x7f:
+            skip = 0
+        elif data[i] & 0b11111000 == 0b11110000:
+            # 4-byte utf-8 character encoding
+            span = 4
+            if n - i >= span:
+                next_body = list(map(
+                    lambda x: x & 0b11000000 == 0b10000000,
+                    data[i + 1: i + span],
+                ))
+                if not all(next_body):
+                    return False
+                skip = span - 1
             else:
                 return False
-        #3-byte char
-        elif bit3 == 1 and bit4 == 0:
-            #check 2nd byte
-            try:
-                byte = data[idx+1]
-            except:
-                return False
-            byte2_bit1 = byte & mask1
-            byte2_bit2 = byte & mask2
-            if byte2_bit1 == 1 and byte2_bit2 == 0:
-                #check 3rd byte
-                try:
-                    byte = data[idx+2]
-                except:
+        elif data[i] & 0b11110000 == 0b11100000:
+            # 3-byte utf-8 character encoding
+            span = 3
+            if n - i >= span:
+                next_body = list(map(
+                    lambda x: x & 0b11000000 == 0b10000000,
+                    data[i + 1: i + span],
+                ))
+                if not all(next_body):
                     return False
-                byte3_bit1 = byte & mask1
-                byte3_bit2 = byte & mask2
-                if byte3_bit1 == 1 and byte3_bit2 == 0:
-                    idx += 2
-                    continue
-                else:
-                    return False
+                skip = span - 1
             else:
                 return False
-        #4-byte char
-        elif bit1 == 1 and bit2 == 1 and bit3 == 1 and bit4 == 1:
-            #check 2nd byte
-            try:
-                byte = data[idx+1]
-            except:
-                return False
-            byte2_bit1 = byte & mask1
-            byte2_bit2 = byte & mask2
-            if byte2_bit1 == 1 and byte2_bit2 == 0:
-                #check 3rd byte
-                try:
-                    byte = data[idx+2]
-                except:
+        elif data[i] & 0b11100000 == 0b11000000:
+            # 2-byte utf-8 character encoding
+            span = 2
+            if n - i >= span:
+                next_body = list(map(
+                    lambda x: x & 0b11000000 == 0b10000000,
+                    data[i + 1: i + span],
+                ))
+                if not all(next_body):
                     return False
-                byte3_bit1 = byte & mask1
-                byte3_bit2 = byte & mask2
-                if byte3_bit1 == 1 and byte3_bit2 == 0:
-                    #check 4th byte
-                    byte = data[idx+3]
-                    byte4_bit1 = byte & mask1
-                    byte4_bit2 = byte & mask2
-                    if byte4_bit1 == 1 and byte4_bit2 == 0:
-                        idx += 3
-                        continue
-                    else:
-                        return False
-                else:
-                    return False
+                skip = span - 1
             else:
                 return False
-
+        else:
+            return False
+    return True

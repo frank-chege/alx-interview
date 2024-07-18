@@ -1,22 +1,25 @@
 #!/usr/bin/python3
-'''making change'''
-from typing import List
+"""Change making module.
+"""
 
-def makeChange(coins: List[int], total: int)->int:
-    '''get the minimum no. of coins required to achieve the total'''
+
+def makeChange(coins, total):
+    """Determines the fewest number of coins needed to meet a given
+    amount total when given a pile of coins of different values.
+    """
     if total <= 0:
         return 0
-    coins.sort(reverse=True)
-    sum = 0
-    count = 0
-    length = len(coins)
-    for idx in range(0, length):
-        while sum <= total:
-            count += 1
-            sum += coins[idx]
-            if sum == total:
-                return count
-        #remove last count and sum
-        count -= 1
-        sum -= coins[idx]
-    return -1
+    rem = total
+    coins_count = 0
+    coin_idx = 0
+    sorted_coins = sorted(coins, reverse=True)
+    n = len(coins)
+    while rem > 0:
+        if coin_idx >= n:
+            return -1
+        if rem - sorted_coins[coin_idx] >= 0:
+            rem -= sorted_coins[coin_idx]
+            coins_count += 1
+        else:
+            coin_idx += 1
+    return coins_count

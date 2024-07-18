@@ -1,18 +1,26 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+
 """
-calculate the minimun copy and paste operations
-required to obtain the specified no. of characters
+In a text file, there is a single character H. Your text editor can execute
+ only two operations in this file: Copy All and Paste. Given a number n, write
+ a method that calculates the fewest number of operations needed to result in
+ exactly n H characters in the file.
+
+Prototype: def minOperations(n)
+Returns an integer
+If n is impossible to achieve, return 0
 """
 
 def minOperations(n):
-    total = 0
-    if n <= 1:
-        return 0
-    else:
-        for x in range(n-1,0,-1):
-            if n <= 1:
-                break
-            if n % x == 0:
-                total += x
-                n = n // x
-        return total
+    """
+    returns the fewest number of operation need to result in exactly
+    n H characters in the file
+    """
+    a = 0
+    b = 2
+    while n > 1:
+        while n % b == 0:
+            a += b
+            n = n / b
+        b += 1
+    return a
